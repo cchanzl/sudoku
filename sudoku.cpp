@@ -71,4 +71,31 @@ void display_board(const char board[9][9]) {
   print_frame(9);
 }
 
-/* add your functions here */
+/*answer to question 1*/
+bool is_complete(const char board[9][9]) {
+  for ( int r = 0; r<9; r++){
+    for (int c = 0; c<9; c++){
+      //isdigit checks whether each position has a digit
+      if(!isdigit(board[r][c]))return false; 
+    }
+  }
+  return true;
+}
+
+
+
+/*answer to question 2*/
+
+
+
+
+
+
+/*answer to question 3*/
+
+
+
+
+
+
+/*answer to question 4*/

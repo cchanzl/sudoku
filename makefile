@@ -1,10 +1,5 @@
-all:  main sudoku
+execute:  main.cpp sudoku.cpp
+	g++ -g main.cpp sudoku.cpp -o execute
 
-main: main.cpp sudoku.h
-	g++ -Wall -g main.cpp -o main
-
-sudoku: sudoku.cpp sudoku.h
-	g++ -Wall -g sudoku.cpp -o sudoku
-
-clean: 
-	rm -f main.o sudoku.o
+clean:
+	rm -f *.o execute
