@@ -33,7 +33,7 @@ int main() {
     cout << "NOT ";
   }
   cout << "complete." << "\n\n";
-  /*
+  
   cout << "=================== Question 2 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -45,7 +45,7 @@ int main() {
   }
   cout << "a valid move. The board is:" << '\n';
   display_board(board);
-
+  /*
   // write more tests
 
   cout << "=================== Question 3 ===================" << "\n\n";

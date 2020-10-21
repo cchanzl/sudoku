@@ -85,9 +85,43 @@ bool is_complete(const char board[9][9]) {
 
 
 /*answer to question 2*/
+bool make_move(const char position[2], char digit, char board [9][9]){
+  //checks if position is out of range
+  switch(position[0]){
+  case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H': case 'I':;
+      break;
+  default: return false;
+  }
+
+  switch(position[1]){
+  case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':;
+      break;
+  default: return false;
+  }
+
+  //convert position[] into int type for use in board[]
+  int row = static_cast<int>(position[0]) - 65;
+  int col = static_cast<int>(position[1]) - 49;
+
+  //checks if there is already a move made in position
+  //if ( board[row][col] != ' ') return false;
+  
+  //checks if digit is valid in its column
+  for ( int i = 0; i <= 8; i++){
+    if (board[row][i] == digit) return false;
+  }
+  //checks if digit is valid in its row
+  for ( int i = 0; i <= 8; i++){
+    if (board[i][col] == digit) return false;
+  }
+  //checks if digit is valid in its sub-board
 
 
+  //if all of the above checks are ok
+  board[row][col] = digit;
 
+  return true;
+}
 
 
 
