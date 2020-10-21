@@ -86,36 +86,54 @@ bool is_complete(const char board[9][9]) {
 
 /*answer to question 2*/
 bool make_move(const char position[2], char digit, char board [9][9]){
-  //checks if position is out of range
+  //check if position is out of range and locate sub-board
+  int sb_row, sb_col;  //initilise top left hand corner of sub-board
+
   switch(position[0]){
-  case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H': case 'I':;
-      break;
+  case 'A': case 'B': case 'C':
+    sb_row = 0;
+    break;
+  case 'D': case 'E': case 'F':
+    sb_row = 3;
+    break;
+  case 'G': case 'H': case 'I':
+    sb_row = 6;
+    break;
   default: return false;
   }
 
   switch(position[1]){
-  case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':;
-      break;
+  case '1': case '2': case '3':
+    sb_col = 0;
+    break;
+  case '4': case '5': case '6':
+    sb_col = 3;
+    break;
+  case '7': case '8': case '9': 
+    sb_col = 6;
+    break;
   default: return false;
   }
 
-  //convert position[] into int type for use in board[]
+  //check if digit is already present in sub-board
+  for (int r = 0; r<=2; r++){
+    for (int c = 0; c<=2; c++){
+      if (board[sb_row+r][sb_col+c] == digit) return false;
+    }
+  }
+
+  //convert position[] into int type for use in board[][]
   int row = static_cast<int>(position[0]) - 65;
   int col = static_cast<int>(position[1]) - 49;
 
-  //checks if there is already a move made in position
-  //if ( board[row][col] != ' ') return false;
+  //check if there is already a move made in position
+  if (board[row][col] != '.') return false;
   
-  //checks if digit is valid in its column
-  for ( int i = 0; i <= 8; i++){
+  //check if digit is valid in its row and column
+  for (int i = 0; i <= 8; i++){
     if (board[row][i] == digit) return false;
-  }
-  //checks if digit is valid in its row
-  for ( int i = 0; i <= 8; i++){
     if (board[i][col] == digit) return false;
   }
-  //checks if digit is valid in its sub-board
-
 
   //if all of the above checks are ok
   board[row][col] = digit;
