@@ -7,9 +7,9 @@ using namespace std;
 int main() {
 
   char board[9][9];
-
+  
   /* This section illustrates the use of the pre-supplied helper functions. */
-  cout << "============= Pre-supplied functions =============" << "\n\n";
+/* cout << "============= Pre-supplied functions =============" << "\n\n";
 
   cout << "Calling load_board():" << '\n';
   load_board("easy.dat", board);
@@ -26,7 +26,7 @@ int main() {
     cout << "NOT ";
   }
   cout << "complete." << "\n\n";
-
+  
   load_board("easy-solution.dat", board);
   cout << "Board is ";
   if (!is_complete(board)) {
@@ -47,7 +47,7 @@ int main() {
   display_board(board);
   
   // write more tests
-
+  
   cout << "=================== Question 3 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -57,7 +57,7 @@ int main() {
     cout << "Save board failed." << '\n';
   }
   cout << '\n';
-  
+  */  
   cout << "=================== Question 4 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -68,6 +68,7 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
+
   /*
   load_board("medium.dat", board);
   if (solve_board(board)) {

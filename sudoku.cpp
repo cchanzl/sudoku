@@ -165,7 +165,6 @@ bool save_board(const char* filename, char board[9][9]) {
 bool solve_board(char board[9][9]){
   char board2[81][9];
   char interim_board[9][9];
-  save_board("interim_board.dat", board);
 
   //step 1: create a secondary board to record possible moves
      
@@ -177,7 +176,7 @@ bool solve_board(char board[9][9]){
       position[1] = static_cast<char>(c + 49);  //convert to char to feed into make_move
 
       for(int d =1; d<=9; d++){    //iterate through each possible digit
-	load_board("interim_board.dat", interim_board);  //reloads board every iteration
+	copyarray(interim_board, board);   //reloads board every iteration
 	if( make_move(position, static_cast<char>(d-1+49), interim_board) ) board2[cell][d-1] = static_cast<char>(d-1+49);
 	else board2[cell][d-1] = '.';
       }
@@ -196,8 +195,7 @@ bool solve_board(char board[9][9]){
   }
 
   //step 2: identify cells that has only 1 possible move and update the board
-
-  display_board(board);
+  display_board(board);  //to delete this, which is to show board before update
   
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
@@ -222,6 +220,7 @@ bool solve_board(char board[9][9]){
 
   char row_unique_digit[9][9];   //store unique digit for each row
   for (int r = 0; r<=8; r++){
+    cout << "Unique solution in Row " << r+1 << ": ";
     for(int z=0;z<=8;z++){
       int sum = 0;
       for(int c=0;c<=8;c++){
@@ -232,13 +231,15 @@ bool solve_board(char board[9][9]){
       }
     
       if(sum == z+1)row_unique_digit[r][z] = static_cast<char>(z+49);
-      else 
-	row_unique_digit[r][z] = '.';
+      else row_unique_digit[r][z] = '.';
+      cout << row_unique_digit[r][z]; //to check why there is \216^?
     }
-    cout << row_unique_digit[r] << endl; //to check why there is \216^?
+    cout << endl;
+   
   }
 
-  cout << endl; 
+  cout << endl;
+  
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
       for(int z = 0; z<=8; z++){
@@ -251,14 +252,22 @@ bool solve_board(char board[9][9]){
   }
 
   //step 4: check within each column if there is a cell with a unique solution
-
+  
   
   
   //add final checking function to sum column, row and sub-boards!
 
   display_board(board);
-  //solve_board(board);
+  save_board("interim.dat", board);
+  if(!is_complete(board))solve_board(board);
   return is_complete(board);
 
 }
 
+void copyarray(char array1[9][9], char array2[9][9]){
+  for (int r = 0; r<=8; r++){
+    for(int c = 0; c <=8; c++){
+      array1[r][c] = array2[r][c];
+    }
+  }
+}
