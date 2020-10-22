@@ -72,7 +72,7 @@ void display_board(const char board[9][9]) {
 }
 
 /*answer to question 1*/
-bool is_complete(const char board[9][9]) {
+bool is_complete(const char board[9][9]) { //return true if complete
   for ( int r = 0; r<9; r++){
     for (int c = 0; c<9; c++){
       //isdigit checks whether each position has a digit
@@ -163,9 +163,12 @@ bool save_board(const char* filename, char board[9][9]) {
 
 /*answer to question 4*/
 bool solve_board(char board[9][9]){
+
   char board2[81][9];
   char interim_board[9][9];
-
+  char prev_board[9][9];
+  copyarray(prev_board, board);
+  
   //step 1: create a secondary board to record possible moves
      
   for (int r = 0; r<=8; r++){
@@ -183,7 +186,7 @@ bool solve_board(char board[9][9]){
     }
   }
 
-  //to delete, to print out possible solutions for all 81 cells
+  /*to delete, to print out possible solutions for all 81 cells
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){ 
       cout << "The possible solution for cell "<< r*9+c <<" is ";
@@ -192,10 +195,9 @@ bool solve_board(char board[9][9]){
       }
       cout << endl;
     }
-  }
+  }*/
 
   //step 2: identify cells that has only 1 possible move and update the board
-  display_board(board);  //to delete this, which is to show board before update
   
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
@@ -252,18 +254,24 @@ bool solve_board(char board[9][9]){
   }
 
   //step 4: check within each column if there is a cell with a unique solution
-  
-  
-  
-  //add final checking function to sum column, row and sub-boards!
 
-  display_board(board);
   save_board("interim.dat", board);
-  if(!is_complete(board))solve_board(board);
-  return is_complete(board);
+  cout << is_complete(board) << endl;
 
+  //Exit from function
+  
+  if(!compare_board(prev_board,board)) solve_board(board); //else continue solving
+ 
+  
+  if(is_complete(board)){
+    //add final checking function to sum column, row and sub-board
+    return true;
+  }
+
+  return false;
 }
 
+/* Internal helper function to copy array*/
 void copyarray(char array1[9][9], char array2[9][9]){
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
@@ -271,3 +279,14 @@ void copyarray(char array1[9][9], char array2[9][9]){
     }
   }
 }
+
+/* Internal helper function to compare board. Returns false if different. */
+bool compare_board(char array1[9][9], char array2[9][9]){
+  for (int r = 0; r<=8; r++){
+    for(int c = 0; c <=8; c++){
+      if(array1[r][c] != array2[r][c]) return false; 
+    }
+  }
+  return true;
+}
+
