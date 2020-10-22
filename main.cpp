@@ -57,7 +57,7 @@ int main() {
     cout << "Save board failed." << '\n';
   }
   cout << '\n';
-  */  
+*/  
   cout << "=================== Question 4 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -68,8 +68,7 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
-
-  /*
+  
   load_board("medium.dat", board);
   if (solve_board(board)) {
     cout << "The 'medium' board has a solution:" << '\n';
@@ -82,8 +81,33 @@ int main() {
   // write more tests
 
   cout << "=================== Question 5 ===================" << "\n\n";
-  */
-  // write more tests
+  
+  load_board("mystery1.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery1' board has a solution:" << '\n';
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found." << '\n';
+  }
+  cout << '\n';
+  
+  load_board("mystery2.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery2' board has a solution:" << '\n';
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found." << '\n';
+  }
+  cout << '\n';
+  
+  load_board("mystery3.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'mystery3' board has a solution:" << '\n';
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found." << '\n';
+  }
+  cout << '\n';
   
   return 0;
 }

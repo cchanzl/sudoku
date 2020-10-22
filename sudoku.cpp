@@ -163,112 +163,37 @@ bool save_board(const char* filename, char board[9][9]) {
 
 /*answer to question 4*/
 bool solve_board(char board[9][9]){
-
-  char board2[81][9];
-  char interim_board[9][9];
+  
   char prev_board[9][9];
   copyarray(prev_board, board);
+  static int iteration = 0;
   
-  //step 1: create a secondary board to record possible moves
-     
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){ 
-      int cell = r*9+c;   // cell reference for board2
+
+      if(board[r][c] != '.') {
+	continue;
+      }
       char position[2];
       position[0] = static_cast<char>(r + 65);  //convert to char to feed into make_move
       position[1] = static_cast<char>(c + 49);  //convert to char to feed into make_move
 
-      for(int d =1; d<=9; d++){    //iterate through each possible digit
-	copyarray(interim_board, board);   //reloads board every iteration
-	if( make_move(position, static_cast<char>(d-1+49), interim_board) ) board2[cell][d-1] = static_cast<char>(d-1+49);
-	else board2[cell][d-1] = '.';
-      }
-    }
-  }
-
-  /*to delete, to print out possible solutions for all 81 cells
-  for (int r = 0; r<=8; r++){
-    for(int c = 0; c <=8; c++){ 
-      cout << "The possible solution for cell "<< r*9+c <<" is ";
-      for(int z = 0; z<=8; z++){
-	cout << board2[r*9+c][z];
-      }
-      cout << endl;
-    }
-  }*/
-
-  //step 2: identify cells that has only 1 possible move and update the board
-  
-  for (int r = 0; r<=8; r++){
-    for(int c = 0; c <=8; c++){
-      int cell = r*9+c;
-      int count = 0;  //start count of '.'
-     
-      for(int z = 0; z<=8; z++){
-	if(board2[cell][z] == '.') count++;
-      }
-   
-      if(count==8){
-	for(int z = 0; z<=8; z++){
-	  if(board2[cell][z] == '.');
-	  else
-	    board[r][c] = static_cast<char>(z+49);
+      for(char digit = '1'; digit <='9';digit++){
+	copyarray(board, prev_board);  //to reset board when returning from solve_board
+	if( make_move(position, digit, board) ){
+	  //display_board(board);  //to display changes when debugging
+	  iteration++;
+	  if(is_complete(board))return true; //end game when board is completed
+	  if(solve_board(board)) goto solved;
 	}
       }
+      //save_board("interim.dat", board);  //for debuggin purposes
+      return false;
     }
   }
-
-  //step 3: check within each row if there is a cell with a unique solution
-
-  char row_unique_digit[9][9];   //store unique digit for each row
-  for (int r = 0; r<=8; r++){
-    cout << "Unique solution in Row " << r+1 << ": ";
-    for(int z=0;z<=8;z++){
-      int sum = 0;
-      for(int c=0;c<=8;c++){
-	int add = 0;
-	if (board2[r*9+c][z] == '.') add = 0;
-	else add = static_cast<int>(board2[r*9+c][z]) - 48; 
-	sum += add;
-      }
-    
-      if(sum == z+1)row_unique_digit[r][z] = static_cast<char>(z+49);
-      else row_unique_digit[r][z] = '.';
-      cout << row_unique_digit[r][z]; //to check why there is \216^?
-    }
-    cout << endl;
-   
-  }
-
-  cout << endl;
-  
-  for (int r = 0; r<=8; r++){
-    for(int c = 0; c <=8; c++){
-      for(int z = 0; z<=8; z++){
-	if(board2[r*9+c][z]=='.');
-	else if (board2[r*9+c][z]==row_unique_digit[r][z]){
-	  board[r][c] = row_unique_digit[r][z];
-	}
-      }
-    }
-  }
-
-  //step 4: check within each column if there is a cell with a unique solution
-
-  save_board("interim.dat", board);
-  cout << is_complete(board) << endl;
-
-  //Exit from function
-  
-  if(!compare_board(prev_board,board)) solve_board(board); //else continue solving
- 
-  
-  if(is_complete(board)){
-    //add final checking function to sum column, row and sub-board
-    return true;
-  }
-
-  return false;
+ solved:
+  cout << "This board took " << iteration << " iterations!" << endl;
+  return true;
 }
 
 /* Internal helper function to copy array*/
@@ -279,14 +204,3 @@ void copyarray(char array1[9][9], char array2[9][9]){
     }
   }
 }
-
-/* Internal helper function to compare board. Returns false if different. */
-bool compare_board(char array1[9][9], char array2[9][9]){
-  for (int r = 0; r<=8; r++){
-    for(int c = 0; c <=8; c++){
-      if(array1[r][c] != array2[r][c]) return false; 
-    }
-  }
-  return true;
-}
-
