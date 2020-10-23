@@ -83,7 +83,6 @@ bool is_complete(const char board[9][9]) { //return true if complete
 }
 
 
-
 /*answer to question 2*/
 bool make_move(const char position[2], char digit, char board [9][9]){
   //check if position is out of range and locate sub-board
@@ -135,7 +134,7 @@ bool make_move(const char position[2], char digit, char board [9][9]){
     if (board[i][col] == digit) return false;
   }
 
-  //if all of the above checks are ok, assign digit to board
+  //if all of the checks above are ok, assign digit to board
   board[row][col] = digit;
 
   return true;
@@ -164,15 +163,17 @@ bool save_board(const char* filename, char board[9][9]) {
 /*answer to question 4*/
 bool solve_board(char board[9][9]){
   
-  char prev_board[9][9];
+  char prev_board[9][9];      //to maintain original board if wrong move is made
   copyarray(prev_board, board);
-  static int iteration = 0;
+  static int iteration = 0;   //to keep track of number of moves made
+  static int count = 0;       //to keep track of original stack frame
+  count++;
   
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){ 
 
       if(board[r][c] != '.') {
-	continue;
+	continue;   //jump to next cell in sudoku table if cell is occupied
       }
       char position[2];
       position[0] = static_cast<char>(r + 65);  //convert to char to feed into make_move
@@ -181,18 +182,25 @@ bool solve_board(char board[9][9]){
       for(char digit = '1'; digit <='9';digit++){
 	copyarray(board, prev_board);  //to reset board when returning from solve_board
 	if( make_move(position, digit, board) ){
-	  //display_board(board);  //to display changes when debugging
 	  iteration++;
-	  if(is_complete(board))return true; //end game when board is completed
-	  if(solve_board(board)) goto solved;
+	  /*cout << "This is the number " << iteration++ << " iteration." << endl;
+	  display_board(board);  //to display changes when debugging
+	  cout << endl;*/
+	  if(is_complete(board)){
+	    count--;
+	    return true; //end game when board is completed
+	  }
+	    if(solve_board(board)) goto solved;
 	}
       }
-      //save_board("interim.dat", board);  //for debuggin purposes
+      //save_board("interim.dat", board);  //for debugging purposes
+      count--;
       return false;
     }
   }
  solved:
-  cout << "This board took " << iteration << " iterations!" << endl;
+  count--;
+  if(count==0)cout <<"This board took " << iteration << " iterations!" << endl;
   return true;
 }
 

@@ -68,7 +68,7 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
-  
+  /*  
   load_board("medium.dat", board);
   if (solve_board(board)) {
     cout << "The 'medium' board has a solution:" << '\n';
@@ -108,6 +108,6 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
-  
+  */
   return 0;
 }
