@@ -183,9 +183,9 @@ bool solve_board(char board[9][9]){
 	copyarray(board, prev_board);  //to reset board when returning from solve_board
 	if( make_move(position, digit, board) ){
 	  iteration++;
-	  /*cout << "This is the number " << iteration++ << " iteration." << endl;
-	  display_board(board);  //to display changes when debugging
-	  cout << endl;*/
+	  //cout << "This is the number " << iteration++ << " iteration." << endl;
+	  //display_board(board);  //to display changes when debugging
+	  //cout << endl;
 	  if(is_complete(board)){
 	    count--;
 	    return true; //end game when board is completed
@@ -200,7 +200,7 @@ bool solve_board(char board[9][9]){
   }
  solved:
   count--;
-  if(count==0)cout <<"This board took " << iteration << " iterations!" << endl;
+  //if(count==0)cout <<"This board took " << iteration << " iterations!" << endl;
   return true;
 }
 

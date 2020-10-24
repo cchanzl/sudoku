@@ -9,7 +9,7 @@ int main() {
   char board[9][9];
   
   /* This section illustrates the use of the pre-supplied helper functions. */
-/* cout << "============= Pre-supplied functions =============" << "\n\n";
+  cout << "============= Pre-supplied functions =============" << "\n\n";
 
   cout << "Calling load_board():" << '\n';
   load_board("easy.dat", board);
@@ -57,7 +57,7 @@ int main() {
     cout << "Save board failed." << '\n';
   }
   cout << '\n';
-*/  
+  
   cout << "=================== Question 4 ===================" << "\n\n";
 
   load_board("easy.dat", board);
@@ -68,7 +68,7 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
-  /*  
+    
   load_board("medium.dat", board);
   if (solve_board(board)) {
     cout << "The 'medium' board has a solution:" << '\n';
@@ -108,6 +108,6 @@ int main() {
     cout << "A solution cannot be found." << '\n';
   }
   cout << '\n';
-  */
+  
   return 0;
 }

@@ -1,1 +1,8 @@
 Summarise your findings here (see specification).
+The 'mystery1' board is of "hard" difficulty.
+The 'mystery3' board is of "extremely hard" difficulty.
+The 'mystery2' board is impossible to solve.
+
+Thhe findings above are based on the number of times make_move is called for each board.
+For 'mystery1', it took 439,378 calls to make_move for 'mystery1' and 465,043 for 'mystery3'.
+In comparison, the 'easy' board took only 2,171 calls while 'medium' board took 17,832 calls to make_move.
