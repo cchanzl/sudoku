@@ -76,7 +76,8 @@ bool is_complete(const char board[9][9]) { //return true if complete
   for ( int r = 0; r<9; r++){
     for (int c = 0; c<9; c++){
       //isdigit checks whether each position has a digit
-      if(!isdigit(board[r][c]))return false; 
+      if(!isdigit(board[r][c]))return false;
+      if(board[r][c] == 0) return false;
     }
   }
   return true;
