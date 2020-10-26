@@ -184,8 +184,8 @@ bool solve_board(char board[9][9]){
 	if( make_move(position, digit, board) ){
 	  //iteration++;
 	  //cout << "This is the number " << iteration++ << " iteration." << endl;
-	  display_board(board);  //to display changes when debugging
-	  cout << endl;
+	  //display_board(board);  //to display changes when debugging
+	  //cout << endl;
 	  if(is_complete(board)){
 	    //count--;
 	    return true; //end game when board is completed
