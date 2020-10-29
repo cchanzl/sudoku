@@ -13,6 +13,9 @@ The 'mystery2' board is impossible to solve.
 |    Mystery3  	|    0.0689 s	|	465,044	    |
 -----------------------------------------------------
 
+Credit: Code for execution timer is taken from the example in
+http://www.cplusplus.com/reference/chrono/high_resolution_clock/now/
+
 The findings above are based on the execution time required to solve
 each board, including the time to display and cout statements.
 
