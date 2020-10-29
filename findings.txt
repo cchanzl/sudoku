@@ -1,8 +1,38 @@
 Summarise your findings here (see specification).
-The 'mystery1' board is of "hard" difficulty.
-The 'mystery3' board is of "extremely hard" difficulty.
+
+The 'mystery1' board is of "extremely hard" difficulty.
+The 'mystery3' board is of "hard" difficulty.
 The 'mystery2' board is impossible to solve.
 
-Thhe findings above are based on the number of times make_move is called for each board.
-For 'mystery1', it took 439,378 calls to make_move for 'mystery1' and 465,043 for 'mystery3'.
-In comparison, the 'easy' board took only 2,171 calls while 'medium' board took 17,832 calls to make_move.
+-----------------------------------------------------
+| Board Tested	| Time elasped	| No. of Recursions |
+|----------------------------------------------------
+|    Easy	|    0.0129 s	|	21,171	    |
+|    Medium 	|    0.0933 s	|	17,832	    |
+|    Mystery1	|    2.4105 s	|	439,378	    |
+|    Mystery3  	|    0.0689 s	|	465,044	    |
+-----------------------------------------------------
+
+The findings above are based on the execution time required to solve
+each board, including the time to display and cout statements.
+
+However, the only difference is the difficulty of the board, hence the
+time can be used as a comparison as to relative difficulty of each
+board.
+
+The longer the execution time, the harder the difficulty, hence
+mystery3 is of the "hard" while mystery1 is of the "extremely hard"
+difficulty.
+
+A solution for mystery2 cannot be found.
+
+Execution time is also compared against the number of times
+make_move() (or recursion) is called for each board.
+
+Clearly, this is not proportionate to the time taken for each board
+since mystery3 required 465,044 recursions yet took only 0.0689s
+compared to mystery2 which took 439,378 recursions but had an
+execution time of 2.4105s.
+
+Note that I was in quarantine during this coursework with slow wifi
+connection. Execution time may be affected as a result.

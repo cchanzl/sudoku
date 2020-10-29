@@ -180,11 +180,11 @@ bool solve_board(char board[9][9]){
   if(!is_valid(board)) return false;
   
   char prev_board[9][9];      //to maintain original board if wrong move is made
-  copyArray(prev_board, board);
-  //static int iteration = 0;   //to keep track of number of moves made
-  //static int count = 0;       //to keep track of original stack frame
-  //count++;
+  copyarray(prev_board, board);
   
+  static int count = 0;       //to keep track of number of recursions
+  count++;
+    
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){ 
 
@@ -195,33 +195,27 @@ bool solve_board(char board[9][9]){
       position[0] = static_cast<char>(r + 65);  //convert to char to feed into make_move
       position[1] = static_cast<char>(c + 49);  //convert to char to feed into make_move
 
-      for(char digit = '1'; digit <='9';digit++){
-	copyArray(board, prev_board);  //to reset board when returning from solve_board
+      for(char digit = '1'; digit <='9'; digit++){
+	copyarray(board, prev_board);  //to reset board when returning from solve_board
 	if( make_move(position, digit, board) ){
-	  //iteration++;
-	  //cout << "This is the number " << iteration++ << " iteration." << endl;
-	  //display_board(board);  //to display changes when debugging
-	  //cout << endl;
 	  if(is_complete(board)){
-	    //count--;
+	    cout << "This board took " << count << " recursions." << endl;
 	    return true; //end game when board is completed
 	  }
 	    if(solve_board(board)) goto solved;
 	}
       }
       //save_board("interim.dat", board);  //for debugging purposes
-      //count--;
+      
       return false;
     }
   }
  solved:
-  //count--;
-  //if(count==0)cout <<"This board took " << iteration << " iterations!" << endl;
   return true;
 }
 
 /* Internal helper function to copy array*/
-void copyArray(char array1[9][9], char array2[9][9]){
+void copyarray(char array1[9][9], char array2[9][9]){
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
       array1[r][c] = array2[r][c];
