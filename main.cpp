@@ -10,7 +10,7 @@ int main() {
     
   /* This section illustrates the use of the pre-supplied helper functions. */
   cout << "============= Pre-supplied functions =============" << "\n\n";
-  /*
+  
   cout << "Calling load_board():" << '\n';
   load_board("easy.dat", board);
 
@@ -103,16 +103,6 @@ int main() {
   load_board("mystery3.dat", board);
   if (solve_board(board)) {
     cout << "The 'mystery3' board has a solution:" << '\n';
-    display_board(board);
-  } else {
-    cout << "A solution cannot be found." << '\n';
-  }
-  cout << '\n';
-  */
-
-  load_board("testing.dat", board);
-  if (solve_board(board)) {
-    cout << "The 'testing' board has a solution:" << '\n';
     display_board(board);
   } else {
     cout << "A solution cannot be found." << '\n';
