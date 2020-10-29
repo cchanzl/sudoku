@@ -74,6 +74,7 @@ void display_board(const char board[9][9]) {
 /*answer to question 1*/
 bool is_complete(const char board[9][9]) { //return true if complete
 
+  assert(board != nullptr);
   for ( int r = 0; r<9; r++){
     for (int c = 0; c<9; c++){
       // isdigit checks whether each position has a digit
@@ -87,7 +88,9 @@ bool is_complete(const char board[9][9]) { //return true if complete
 
 /*answer to question 2*/
 bool make_move(const char position[2], char digit, char board [9][9]){
-
+  // ensure nullptr is not passed to function
+  assert(position != nullptr && board != nullptr);
+  
   // check is digit == 0
   assert(digit != '0');
   
@@ -149,6 +152,9 @@ bool make_move(const char position[2], char digit, char board [9][9]){
 
 /*answer to question 3*/
 bool save_board(const char* filename, char board[9][9]) {
+
+  assert(board != nullptr);
+  assert(filename != nullptr);
   
   ofstream out(filename);
   if (!out) {
@@ -169,7 +175,9 @@ bool save_board(const char* filename, char board[9][9]) {
 
 /*answer to question 4*/
 bool solve_board(char board[9][9]){
-
+  // Ensure nullptr is not passed to function
+  assert(board != nullptr);
+  
   // board must only be numeric or '.'
   assert(is_numeric(board));
 
@@ -216,6 +224,9 @@ bool solve_board(char board[9][9]){
 
 /* Internal helper function to copy array*/
 void copyarray(char array1[9][9], char array2[9][9]){
+
+  assert(array1 != nullptr && array2 != nullptr);
+    
   for (int r = 0; r<=8; r++){
     for(int c = 0; c <=8; c++){
       array1[r][c] = array2[r][c];
@@ -226,6 +237,7 @@ void copyarray(char array1[9][9], char array2[9][9]){
 /* Internal helper function to check board loaded */ 
 bool is_numeric(const char board[9][9]) { //return true if board has only numeric or .
 
+  assert(board != nullptr);
   int blank_cell = 0;
   for ( int r = 0; r<9; r++){
     for (int c = 0; c<9; c++){
@@ -247,6 +259,8 @@ bool is_numeric(const char board[9][9]) { //return true if board has only numeri
 
 /* Internal helper function to check if existing board is immediately invalid */
 bool is_valid(const char board[9][9]) {
+
+  assert(board != nullptr);
 
   for ( int r = 0; r<9; r++){
     for (int c = 0; c<9; c++){
