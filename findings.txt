@@ -20,7 +20,7 @@ The findings above are based on the execution time required to solve
 each board, including the time to display and cout statements.
 
 However, the only difference is the difficulty of the board, hence the
-time can be used as a comparison as to relative difficulty of each
+time can be used as a comparison of the relative difficulty of each
 board.
 
 The longer the execution time, the harder the difficulty, hence
@@ -35,7 +35,9 @@ make_move() (or recursion) is called for each board.
 Clearly, this is not proportionate to the time taken for each board
 since mystery3 required 465,044 recursions yet took only 0.0689s
 compared to mystery2 which took 439,378 recursions but had an
-execution time of 2.4105s.
+execution time of 2.4105s. This is because mystery1 has a "deeper"
+recursion each time make_move() is called, probably due to a higher number
+of possible moves in each cell. 
 
 Note that I was in quarantine during this coursework with slow wifi
 connection. Execution time may be affected as a result.
